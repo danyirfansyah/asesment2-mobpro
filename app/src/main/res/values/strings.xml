@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Mobpro 1</string>
+    <string name="list_kosong">Belum ada data mahasiswa</string>
+    <string name="x_diklik">%1$s diklik!</string>
+    <string name="tambah_catatan">Tambah mahasiswa</string>
+    <string name="judul">Nama</string>
+    <string name="kelas">Kelas</string>
+    <string name="kelas1">D3IF-46-01</string>
+    <string name="kelas2">D3IF-46-02</string>
+    <string name="kelas3">D3IF-46-03</string>
+    <string name="kelas4">D3IF-46-04</string>
+    <string name="kelas5">D3IF-46-05</string>
+    <string name="isi_catatan">NIM</string>
+    <string name="kembali">Kembali</string>
+    <string name="simpan">Simpan</string>
+    <string name="edit_catatan">Ubah catatan</string>
+    <string name="invalid">Judul dan isi catatan tidak boleh kosong</string>
+    <string name="lainnya">Opsi lainnya</string>
+    <string name="hapus">Hapus catatan</string>
+    <string name="pesan_hapus">Hapus catatan ini?</string>
+    <string name="tombol_hapus">Hapus</string>
+    <string name="tombol_batal">Batal</string>
+    <string name="list">Tampilan list</string>
+    <string name="grid">Tampilan grid</string>
+</resources>
