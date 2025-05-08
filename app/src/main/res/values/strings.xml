@@ -4,12 +4,9 @@
     <string name="x_diklik">%1$s diklik!</string>
     <string name="tambah_catatan">Tambah mahasiswa</string>
     <string name="judul">Nama</string>
-    <string name="kelas">Kelas</string>
-    <string name="kelas1">D3IF-46-01</string>
-    <string name="kelas2">D3IF-46-02</string>
-    <string name="kelas3">D3IF-46-03</string>
-    <string name="kelas4">D3IF-46-04</string>
-    <string name="kelas5">D3IF-46-05</string>
+    <string name="jenis_kelamin">Jenis Kelamin</string> <!-- New entry for gender -->
+    <string name="laki_laki">Laki-laki</string> <!-- Gender option -->
+    <string name="perempuan">Perempuan</string> <!-- Gender option -->
     <string name="isi_catatan">NIM</string>
     <string name="kembali">Kembali</string>
     <string name="simpan">Simpan</string>
