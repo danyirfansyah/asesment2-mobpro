@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Mobpro 1"
+rootProject.name = "InfoDiri"
 include(":app")
