@@ -4,6 +4,8 @@
     <string name="x_diklik">%1$s diklik!</string>
     <string name="tambah_catatan">Tambah mahasiswa</string>
     <string name="judul">Nama</string>
+    <string name="noHp">No Hp</string>
+    <string name="email">Email</string>
     <string name="jenis_kelamin">Jenis Kelamin</string> <!-- New entry for gender -->
     <string name="laki_laki">Laki-laki</string> <!-- Gender option -->
     <string name="perempuan">Perempuan</string> <!-- Gender option -->
