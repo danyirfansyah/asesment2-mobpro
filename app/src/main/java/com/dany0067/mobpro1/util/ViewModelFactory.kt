@@ -7,17 +7,20 @@ import com.dany0067.mobpro1.database.CatatanDb
 import com.dany0067.mobpro1.ui.screen.DetailViewModel
 import com.dany0067.mobpro1.ui.screen.MainViewModel
 
-class ViewModelFactory(
-    private val context: Context
-) : ViewModelProvider.Factory {
+class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        val dao = CatatanDb.getInstance(context).dao
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(dao) as T
-        } else if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return  DetailViewModel(dao) as T
+        val dao = CatatanDb.getInstance(context)
+        val catatanDao = dao.catatanDao
+
+        return when {
+            modelClass.isAssignableFrom(MainViewModel::class.java) -> {
+                MainViewModel(catatanDao) as T
+            }
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(catatanDao) as T
+            }
+            else -> throw IllegalArgumentException("Unknown ViewModel class")
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
