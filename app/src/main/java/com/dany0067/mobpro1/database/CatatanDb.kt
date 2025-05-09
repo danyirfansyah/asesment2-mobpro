@@ -5,14 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.dany0067.mobpro1.model.Catatan
+import com.dany0067.mobpro1.model.Kontak
 
-@Database(entities = [Catatan::class], version = 1, exportSchema = false)
+@Database(entities = [Catatan::class, Kontak::class], version = 1)
 abstract class CatatanDb : RoomDatabase() {
-
-    abstract val dao: CatatanDao
+    abstract val catatanDao: CatatanDao
 
     companion object {
-
         @Volatile
         private var INSTANCE: CatatanDb? = null
 
