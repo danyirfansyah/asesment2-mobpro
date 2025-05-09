@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.dany0067.mobpro1.R
-import com.dany0067.mobpro1.model.Catatan
+import com.dany0067.mobpro1.model.CatatanWithTelefon
 import com.dany0067.mobpro1.navigation.Screen
 import com.dany0067.mobpro1.ui.theme.Mobpro1Theme
 import com.dany0067.mobpro1.util.SettingsDataStore
@@ -129,9 +129,9 @@ fun ScreenContent(showList: Boolean, modifier: Modifier = Modifier, navControlle
             modifier = modifier.fillMaxSize(),
             contentPadding = PaddingValues(bottom = 84.dp)
         ) {
-            items(data) {
-                ListItem(catatan = it) {
-                    navController.navigate(Screen.FormUbah.withId(it.id))
+            items(data) { item ->
+                ListItem(catatanWithTelefon = item) {
+                    navController.navigate(Screen.FormUbah.withId(item.catatan.id))
                 }
                 HorizontalDivider()
             }
@@ -144,9 +144,9 @@ fun ScreenContent(showList: Boolean, modifier: Modifier = Modifier, navControlle
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 contentPadding = PaddingValues(8.dp, 8.dp, 8.dp, 84.dp)
             ) {
-                items(data) {
-                    GridItem(catatan = it) {
-                        navController.navigate(Screen.FormUbah.withId(it.id))
+                items(data) { item ->
+                    GridItem(catatanWithTelefon = item) {
+                        navController.navigate(Screen.FormUbah.withId(item.catatan.id))
                     }
                 }
             }
@@ -155,7 +155,7 @@ fun ScreenContent(showList: Boolean, modifier: Modifier = Modifier, navControlle
 }
 
 @Composable
-fun ListItem(catatan: Catatan, onClick: () -> Unit) {
+fun ListItem(catatanWithTelefon: CatatanWithTelefon, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -164,22 +164,35 @@ fun ListItem(catatan: Catatan, onClick: () -> Unit) {
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
-            text = catatan.nama,
+            text = catatanWithTelefon.catatan.nama,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.Bold
         )
         Text(
-            text = catatan.NIM,
+            text = catatanWithTelefon.catatan.NIM,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
-        Text(text = catatan.kelas)
+        Text(text = catatanWithTelefon.catatan.jenisKelamin)
+
+        Text(
+            text = catatanWithTelefon.kontak.noHp,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+
+        Text(
+            text = catatanWithTelefon.kontak.email,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
     }
 }
 
+
 @Composable
-fun GridItem(catatan: Catatan, onClick: () -> Unit) {
+fun GridItem(catatanWithTelefon: CatatanWithTelefon, onClick: () -> Unit) {
     Card(
         modifier = Modifier.fillMaxWidth().clickable { onClick() },
         colors = CardDefaults.cardColors(
@@ -192,20 +205,33 @@ fun GridItem(catatan: Catatan, onClick: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text(
-                text = catatan.nama,
+                text = catatanWithTelefon.catatan.nama,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = catatan.NIM,
+                text = catatanWithTelefon.catatan.NIM,
                 maxLines = 4,
                 overflow = TextOverflow.Ellipsis
             )
-            Text(text = catatan.kelas)
+            Text(text = catatanWithTelefon.catatan.jenisKelamin)
+
+            Text(
+                text = catatanWithTelefon.kontak.noHp,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+
+            Text(
+                text = catatanWithTelefon.kontak.email,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
         }
     }
 }
+
 
 
 @Preview(showBackground = true)
