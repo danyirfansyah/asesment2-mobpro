@@ -63,14 +63,18 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
     var nama by remember { mutableStateOf("") }
     var nim by remember { mutableStateOf("") }
     var kelas by remember { mutableStateOf("") }
+    var noHp by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
     var showDialog by remember { mutableStateOf(false) }
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(id) {
         if (id == null) return@LaunchedEffect
-        val data = viewModel.getCatatan(id) ?: return@LaunchedEffect
-        nama = data.nama
-        nim = data.NIM
-        kelas = data.kelas
+        val data = viewModel.getCatatanWithKontak(id) ?: return@LaunchedEffect
+        nama = data.catatan.nama
+        nim = data.catatan.NIM
+        kelas = data.catatan.jenisKelamin
+        noHp = data.kontak.noHp
+        email = data.kontak.email
     }
 
     Scaffold(
@@ -102,10 +106,11 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
                             return@IconButton
                         }
                         if (id == null) {
-                            viewModel.insert(nama, nim, kelas)
+                            viewModel.insert(nama, nim, kelas, noHp, email)
                         } else {
-                            viewModel.update(id, nama, nim, kelas)
+                            viewModel.update(id, nama, nim, kelas, noHp, email)
                         }
+
                         navController.popBackStack()
                     }) {
                         Icon(
@@ -128,8 +133,10 @@ fun DetailScreen(navController: NavHostController, id: Long? = null) {
             onTitleChange = { nama = it },
             nim = nim,
             onNimChange = { nim = it },
-            kelas = kelas,
-            onKelasChange = { kelas = it },
+            jenisKelamin = kelas,
+            onJenisKelaminChange = { kelas = it },
+            noHp = noHp, onNoHpChange = { noHp = it },
+            email = email, onEmailChange = { email = it },
             modifier = Modifier.padding(padding)
         )
 
@@ -174,7 +181,9 @@ fun DeleteAction(delete: () -> Unit) {
 fun FormCatatan(
     title: String, onTitleChange: (String) -> Unit,
     nim: String, onNimChange: (String) -> Unit,
-    kelas: String, onKelasChange: (String) -> Unit,
+    jenisKelamin: String, onJenisKelaminChange: (String) -> Unit,
+    noHp: String, onNoHpChange: (String) -> Unit,
+    email: String, onEmailChange: (String) -> Unit,
     modifier: Modifier
 ) {
     Column(
@@ -205,6 +214,29 @@ fun FormCatatan(
             modifier = Modifier.fillMaxWidth()
         )
 
+        OutlinedTextField(
+            value = noHp,
+            onValueChange = { onNoHpChange(it) },
+            label = { Text(text = "NoHp") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Next
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        OutlinedTextField(
+            value = email,
+            onValueChange = { onEmailChange(it) },
+            label = { Text(text = "Email") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Next
+            ),
+            modifier = Modifier.fillMaxWidth()
+        )
+
         Box(
             modifier = Modifier.fillMaxWidth().padding(8.dp).border(1.dp, MaterialTheme.colorScheme.primary)
         ) {
@@ -212,30 +244,20 @@ fun FormCatatan(
                 modifier = Modifier.padding(8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                listOf(
-                    "D3IF-46-01",
-                    "D3IF-46-02",
-                    "D3IF-46-03",
-                    "D3IF-46-04",
-                    "D3IF-46-05"
-                ).forEach { kelasOption ->
+                listOf("Laki-laki", "Perempuan").forEach { jenisKelaminOption ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         RadioButton(
-                            selected = kelas == kelasOption,
-                            onClick = { onKelasChange(kelasOption) }
+                            selected = jenisKelamin == jenisKelaminOption,
+                            onClick = { onJenisKelaminChange(jenisKelaminOption) }
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = kelasOption)
+                        Text(text = jenisKelaminOption)
                     }
                 }
             }
         }
     }
 }
-
-
-
-
 
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
