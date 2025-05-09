@@ -9,5 +9,5 @@ data class Catatan(
     val id: Long = 0L,
     val nama: String,
     val NIM: String,
-    val kelas: String
+    val jenisKelamin: String
 )
