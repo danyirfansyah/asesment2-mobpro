@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.dany0067.mobpro1.navigation.SetupNavGraph
-import com.dany0067.mobpro1.ui.screen.MainScreen
 import com.dany0067.mobpro1.ui.theme.Mobpro1Theme
 
 class MainActivity : ComponentActivity() {
